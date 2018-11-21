@@ -3,3 +3,7 @@ _fbink.c
 # Binaries
 _fbink.o
 _fbink.so
+# Setuptools
+dist/
+build/
+*.egg-info
