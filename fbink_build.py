@@ -163,7 +163,7 @@ int fbink_button_scan(int, _Bool, _Bool);
 int fbink_wait_for_usbms_processing(int, _Bool);
 """)
 
-# This describes the extension module "_pi_cffi" to produce.
+# This describes the extension module "_fbink" to produce.
 ffibuilder.set_source("_fbink",
 """
      #include "fbink.h"   // the C header of the library
