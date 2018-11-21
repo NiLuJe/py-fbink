@@ -142,7 +142,7 @@ typedef struct {
   _Bool is_centered;
   _Bool is_formatted;
 } FBInkOTConfig;
-const char *fbink_version(void) __attribute__((const));
+const char *fbink_version(void);
 int fbink_open(void);
 int fbink_close(int);
 int fbink_init(int, const FBInkConfig *);
