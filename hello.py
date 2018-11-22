@@ -4,7 +4,7 @@ Barebones example of FBInk usage through Python's cFFI module
 """
 
 import os
-# Load the wrapper module
+# Load the wrapper module, it's linked against fbink, so the dynamic loader will take care of pulling in the actual FBInk library
 from _fbink import ffi, lib as fbink
 
 # Let's check which FBInk version we're using...
