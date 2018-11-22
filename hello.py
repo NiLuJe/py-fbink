@@ -7,6 +7,9 @@ import os
 # Load the wrapper module
 from _fbink import ffi, lib as fbink
 
+# Let's check which FBInk version we're using...
+print("Loaded FBInk {}".format(ffi.string(fbink.fbink_version())))
+
 # And now we're good to go! Let's print "Hello World" in the center of the screen...
 # Setup the config...
 fbink_cfg = ffi.new("FBInkConfig *")
