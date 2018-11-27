@@ -3,7 +3,7 @@
 Barebones example of FBInk usage through Python's cFFI module
 """
 
-import os
+import sys
 # Load the wrapper module, it's linked against fbink, so the dynamic loader will take care of pulling in the actual FBInk library
 from _fbink import ffi, lib as fbink
 
@@ -20,12 +20,12 @@ fbink_cfg.is_halfway = True
 fbfd = fbink.fbink_open()
 if fbfd == -1:
 	print("Failed to open the framebuffer, aborting . . .")
-	os.exit(-1)
+	sys.exit(-1)
 
 # Initialize FBInk...
 if fbink.fbink_init(fbfd, fbink_cfg) < 0:
 	print("Failed to initialize FBInk, aborting . . .")
-	os.exit(-1)
+	sys.exit(-1)
 
 # Do stuff!
 if fbink.fbink_print(fbfd, "Hello World", fbink_cfg) < 0:
@@ -34,4 +34,4 @@ if fbink.fbink_print(fbfd, "Hello World", fbink_cfg) < 0:
 # And now we can wind things down...
 if fbink.fbink_close(fbfd) < 0:
 	print("Failed to close the framebuffer, aborting . . .")
-	os.exit(-1)
+	sys.exit(-1)
