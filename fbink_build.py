@@ -118,6 +118,7 @@ typedef struct {
   short int voffset;
   _Bool is_halfway;
   _Bool is_padded;
+  _Bool is_rpadded;
   unsigned char fg_color;
   unsigned char bg_color;
   _Bool is_overlay;
