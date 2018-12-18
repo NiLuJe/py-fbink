@@ -16,6 +16,7 @@ fbink_cfg = ffi.new("FBInkConfig *")
 fbink_cfg.is_centered = True
 fbink_cfg.is_halfway = True
 
+"""
 # Open the FB...
 fbfd = fbink.fbink_open()
 if fbfd == -1:
@@ -35,3 +36,12 @@ if fbink.fbink_print(fbfd, "Hello World", fbink_cfg) < 0:
 if fbink.fbink_close(fbfd) < 0:
 	print("Failed to close the framebuffer, aborting . . .")
 	sys.exit(-1)
+"""
+
+# Or, the same but in a slightly more Pythonic approach ;).
+fbfd = fbink.fbink_open()
+try:
+	fbink.fbink_init(fbfd, fbink_cfg)
+	fbink.fbink_print(fbfd, "Hello World", fbink_cfg)
+finally:
+	fbink.fbink_close(fbfd)
