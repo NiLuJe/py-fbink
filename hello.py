@@ -4,6 +4,8 @@ Barebones example of FBInk usage through Python's cFFI module
 """
 
 import sys
+# To get a Py3k-like print function
+from __future__ import print_function
 # Load the wrapper module, it's linked against fbink, so the dynamic loader will take care of pulling in the actual FBInk library
 from _fbink import ffi, lib as fbink
 
