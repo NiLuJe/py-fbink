@@ -20,22 +20,19 @@ fbink_cfg.is_halfway = True
 # Open the FB...
 fbfd = fbink.fbink_open()
 if fbfd == -1:
-	print("Failed to open the framebuffer, aborting . . .")
-	sys.exit(-1)
+	raise SystemExit("Failed to open the framebuffer, aborting . . .")
 
 # Initialize FBInk...
 if fbink.fbink_init(fbfd, fbink_cfg) < 0:
-	print("Failed to initialize FBInk, aborting . . .")
-	sys.exit(-1)
+	raise SystemExit("Failed to initialize FBInk, aborting . . .")
 
 # Do stuff!
 if fbink.fbink_print(fbfd, "Hello World", fbink_cfg) < 0:
-	print("Failed to print that string!")
+	print("Failed to print that string!", file=sys.stderr)
 
 # And now we can wind things down...
 if fbink.fbink_close(fbfd) < 0:
-	print("Failed to close the framebuffer, aborting . . .")
-	sys.exit(-1)
+	raise SystemExit("Failed to close the framebuffer, aborting . . .")
 """
 
 # Or, the same but in a slightly more Pythonic approach ;).
