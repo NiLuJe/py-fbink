@@ -34,6 +34,8 @@ typedef enum {
   SCIENTIFICA = 16,
   SCIENTIFICAB = 17,
   SCIENTIFICAI = 18,
+  TERMINUS = 19,
+  TERMINUSB = 20,
 } FONT_INDEX_T;
 typedef enum {
   FNT_REGULAR = 0,
@@ -130,6 +132,7 @@ typedef struct {
   _Bool ignore_alpha;
   unsigned char halign;
   unsigned char valign;
+  _Bool is_dithered;
   _Bool no_refresh;
 } FBInkConfig;
 typedef struct {
@@ -154,7 +157,7 @@ void fbink_get_state(const FBInkConfig *, FBInkState *);
 int fbink_print(int, const char *, const FBInkConfig *);
 int fbink_print_ot(int, const char *, const FBInkOTConfig *, const FBInkConfig *);
 int fbink_printf(int, const FBInkOTConfig *, const FBInkConfig *, const char *, ...);
-int fbink_refresh(int, unsigned int, unsigned int, unsigned int, unsigned int, const char *, _Bool);
+int fbink_refresh(int, unsigned int, unsigned int, unsigned int, unsigned int, const char *, const char *, _Bool);
 int fbink_reinit(int, const FBInkConfig *);
 int fbink_print_progress_bar(int, unsigned char, const FBInkConfig *);
 int fbink_print_activity_bar(int, unsigned char, const FBInkConfig *);
