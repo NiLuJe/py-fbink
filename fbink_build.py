@@ -36,6 +36,10 @@ typedef enum {
   SCIENTIFICAI = 18,
   TERMINUS = 19,
   TERMINUSB = 20,
+  FATTY = 21,
+  SPLEEN = 22,
+  TEWI = 23,
+  TEWIB = 24,
 } FONT_INDEX_T;
 typedef enum {
   FNT_REGULAR = 0,
@@ -162,7 +166,8 @@ int fbink_reinit(int, const FBInkConfig *);
 int fbink_print_progress_bar(int, unsigned char, const FBInkConfig *);
 int fbink_print_activity_bar(int, unsigned char, const FBInkConfig *);
 int fbink_print_image(int, const char *, short int, short int, const FBInkConfig *);
-int fbink_print_raw_data(int, unsigned char *, const int, const int, const unsigned int, short int, short int, const FBInkConfig *);
+int fbink_print_raw_data(int, unsigned char *, const int, const int, const size_t, short int, short int, const FBInkConfig *);
+int fbink_cls(int, const FBInkConfig *);
 int fbink_button_scan(int, _Bool, _Bool);
 int fbink_wait_for_usbms_processing(int, _Bool);
 """)
