@@ -88,6 +88,30 @@ typedef enum {
   BG_GRAY1 = 14,
   BG_BLACK = 15,
 } BG_COLOR_INDEX_T;
+typedef enum {
+  WFM_GC16 = 0,
+  WFM_DU = 1,
+  WFM_GC4 = 2,
+  WFM_A2 = 3,
+  WFM_GL16 = 4,
+  WFM_REAGL = 5,
+  WFM_REAGLD = 6,
+  WFM_GC16_FAST = 7,
+  WFM_GL16_FAST = 8,
+  WFM_DU4 = 9,
+  WFM_GL4 = 10,
+  WFM_GL16_INV = 11,
+  WFM_GCK16 = 12,
+  WFM_GLKW16 = 13,
+  WFM_AUTO = 14,
+} WFM_MODE_INDEX_T;
+typedef enum {
+  HWD_PASSTHROUGH = 0,
+  HWD_FLOYD_STEINBERG = 1,
+  HWD_ATKINSON = 2,
+  HWD_ORDERED = 3,
+  HWD_QUANT_ONLY = 4,
+} HW_DITHER_INDEX_T;
 typedef struct {
   unsigned int view_width;
   unsigned int view_height;
@@ -136,6 +160,7 @@ typedef struct {
   _Bool ignore_alpha;
   unsigned char halign;
   unsigned char valign;
+  unsigned char wfm_mode;
   _Bool is_dithered;
   _Bool no_refresh;
 } FBInkConfig;
@@ -161,7 +186,7 @@ void fbink_get_state(const FBInkConfig *, FBInkState *);
 int fbink_print(int, const char *, const FBInkConfig *);
 int fbink_print_ot(int, const char *, const FBInkOTConfig *, const FBInkConfig *);
 int fbink_printf(int, const FBInkOTConfig *, const FBInkConfig *, const char *, ...);
-int fbink_refresh(int, unsigned int, unsigned int, unsigned int, unsigned int, const char *, const char *, _Bool);
+int fbink_refresh(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned char, unsigned char, _Bool);
 int fbink_reinit(int, const FBInkConfig *);
 int fbink_print_progress_bar(int, unsigned char, const FBInkConfig *);
 int fbink_print_activity_bar(int, unsigned char, const FBInkConfig *);
