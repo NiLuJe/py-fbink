@@ -112,17 +112,24 @@ typedef enum {
   HWD_ORDERED = 3,
   HWD_QUANT_ONLY = 4,
 } HW_DITHER_INDEX_T;
+typedef enum {
+  NTX_ROTA_STRAIGHT = 0,
+  NTX_ROTA_ALL_INVERTED = 1,
+  NTX_ROTA_ODD_INVERTED = 2,
+} NTX_ROTA_INDEX_T;
 typedef struct {
+  long int user_hz;
+  const char *font_name;
   unsigned int view_width;
   unsigned int view_height;
   unsigned int screen_width;
   unsigned int screen_height;
   unsigned int bpp;
+  char device_name[16];
+  short unsigned int device_id;
   unsigned char pen_fg_color;
   unsigned char pen_bg_color;
   short unsigned int screen_dpi;
-  long int user_hz;
-  const char *font_name;
   short unsigned int font_w;
   short unsigned int font_h;
   short unsigned int max_cols;
@@ -134,6 +141,10 @@ typedef struct {
   unsigned char glyph_width;
   unsigned char glyph_height;
   _Bool is_perfect_fit;
+  _Bool is_kobo_non_mt;
+  unsigned char ntx_boot_rota;
+  unsigned char ntx_rota_quirk;
+  _Bool can_rotate;
 } FBInkState;
 typedef struct {
   short int row;
@@ -175,6 +186,16 @@ typedef struct {
   _Bool is_centered;
   _Bool is_formatted;
 } FBInkOTConfig;
+typedef struct {
+  unsigned char rota;
+  unsigned char bpp;
+  short unsigned int x;
+  short unsigned int y;
+  short unsigned int w;
+  short unsigned int h;
+  unsigned char *data;
+  _Bool is_full;
+} FBInkDump;
 const char *fbink_version(void);
 int fbink_open(void);
 int fbink_close(int);
@@ -193,6 +214,9 @@ int fbink_print_activity_bar(int, unsigned char, const FBInkConfig *);
 int fbink_print_image(int, const char *, short int, short int, const FBInkConfig *);
 int fbink_print_raw_data(int, unsigned char *, const int, const int, const size_t, short int, short int, const FBInkConfig *);
 int fbink_cls(int, const FBInkConfig *);
+int fbink_dump(int, FBInkDump *);
+int fbink_region_dump(int, short int, short int, short unsigned int, short unsigned int, const FBInkConfig *, FBInkDump *);
+int fbink_restore(int, const FBInkConfig *, const FBInkDump *);
 int fbink_button_scan(int, _Bool, _Bool);
 int fbink_wait_for_usbms_processing(int, _Bool);
 """)
