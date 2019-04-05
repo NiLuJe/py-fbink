@@ -89,21 +89,21 @@ typedef enum {
   BG_BLACK = 15,
 } BG_COLOR_INDEX_T;
 typedef enum {
-  WFM_GC16 = 0,
+  WFM_AUTO = 0,
   WFM_DU = 1,
-  WFM_GC4 = 2,
-  WFM_A2 = 3,
-  WFM_GL16 = 4,
-  WFM_REAGL = 5,
-  WFM_REAGLD = 6,
-  WFM_GC16_FAST = 7,
-  WFM_GL16_FAST = 8,
-  WFM_DU4 = 9,
-  WFM_GL4 = 10,
-  WFM_GL16_INV = 11,
-  WFM_GCK16 = 12,
-  WFM_GLKW16 = 13,
-  WFM_AUTO = 14,
+  WFM_GC16 = 2,
+  WFM_GC4 = 3,
+  WFM_A2 = 4,
+  WFM_GL16 = 5,
+  WFM_REAGL = 6,
+  WFM_REAGLD = 7,
+  WFM_GC16_FAST = 8,
+  WFM_GL16_FAST = 9,
+  WFM_DU4 = 10,
+  WFM_GL4 = 11,
+  WFM_GL16_INV = 12,
+  WFM_GCK16 = 13,
+  WFM_GLKW16 = 14,
 } WFM_MODE_INDEX_T;
 typedef enum {
   HWD_PASSTHROUGH = 0,
@@ -119,7 +119,7 @@ typedef enum {
 } NTX_ROTA_INDEX_T;
 typedef struct {
   long int user_hz;
-  const char *font_name;
+  const char *restrict font_name;
   unsigned int view_width;
   unsigned int view_height;
   unsigned int screen_width;
@@ -173,6 +173,7 @@ typedef struct {
   unsigned char valign;
   unsigned char wfm_mode;
   _Bool is_dithered;
+  _Bool is_nightmode;
   _Bool no_refresh;
 } FBInkConfig;
 typedef struct {
@@ -187,36 +188,37 @@ typedef struct {
   _Bool is_formatted;
 } FBInkOTConfig;
 typedef struct {
-  unsigned char rota;
-  unsigned char bpp;
+  unsigned char *restrict data;
+  size_t size;
   short unsigned int x;
   short unsigned int y;
   short unsigned int w;
   short unsigned int h;
-  unsigned char *data;
+  unsigned char rota;
+  unsigned char bpp;
   _Bool is_full;
 } FBInkDump;
 const char *fbink_version(void);
 int fbink_open(void);
 int fbink_close(int);
-int fbink_init(int, const FBInkConfig *);
+int fbink_init(int, const FBInkConfig *restrict);
 int fbink_add_ot_font(const char *, FONT_STYLE_T);
 int fbink_free_ot_fonts(void);
-void fbink_state_dump(const FBInkConfig *);
-void fbink_get_state(const FBInkConfig *, FBInkState *);
-int fbink_print(int, const char *, const FBInkConfig *);
-int fbink_print_ot(int, const char *, const FBInkOTConfig *, const FBInkConfig *);
-int fbink_printf(int, const FBInkOTConfig *, const FBInkConfig *, const char *, ...);
-int fbink_refresh(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned char, unsigned char, _Bool);
-int fbink_reinit(int, const FBInkConfig *);
-int fbink_print_progress_bar(int, unsigned char, const FBInkConfig *);
-int fbink_print_activity_bar(int, unsigned char, const FBInkConfig *);
-int fbink_print_image(int, const char *, short int, short int, const FBInkConfig *);
-int fbink_print_raw_data(int, unsigned char *, const int, const int, const size_t, short int, short int, const FBInkConfig *);
-int fbink_cls(int, const FBInkConfig *);
-int fbink_dump(int, FBInkDump *);
-int fbink_region_dump(int, short int, short int, short unsigned int, short unsigned int, const FBInkConfig *, FBInkDump *);
-int fbink_restore(int, const FBInkConfig *, const FBInkDump *);
+void fbink_state_dump(const FBInkConfig *restrict);
+void fbink_get_state(const FBInkConfig *restrict, FBInkState *restrict);
+int fbink_print(int, const char *restrict, const FBInkConfig *restrict);
+int fbink_print_ot(int, const char *restrict, const FBInkOTConfig *restrict, const FBInkConfig *restrict);
+int fbink_printf(int, const FBInkOTConfig *restrict, const FBInkConfig *restrict, const char *, ...);
+int fbink_refresh(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned char, const FBInkConfig *restrict);
+int fbink_reinit(int, const FBInkConfig *restrict);
+int fbink_print_progress_bar(int, unsigned char, const FBInkConfig *restrict);
+int fbink_print_activity_bar(int, unsigned char, const FBInkConfig *restrict);
+int fbink_print_image(int, const char *, short int, short int, const FBInkConfig *restrict);
+int fbink_print_raw_data(int, unsigned char *, const int, const int, const size_t, short int, short int, const FBInkConfig *restrict);
+int fbink_cls(int, const FBInkConfig *restrict);
+int fbink_dump(int, FBInkDump *restrict);
+int fbink_region_dump(int, short int, short int, short unsigned int, short unsigned int, const FBInkConfig *restrict, FBInkDump *restrict);
+int fbink_restore(int, const FBInkConfig *restrict, const FBInkDump *restrict);
 int fbink_button_scan(int, _Bool, _Bool);
 int fbink_wait_for_usbms_processing(int, _Bool);
 """)
