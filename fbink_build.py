@@ -104,6 +104,7 @@ typedef enum {
   WFM_GL16_INV = 12,
   WFM_GCK16 = 13,
   WFM_GLKW16 = 14,
+  WFM_INIT = 15,
 } WFM_MODE_INDEX_T;
 typedef enum {
   HWD_PASSTHROUGH = 0,
@@ -171,8 +172,11 @@ typedef struct {
   _Bool ignore_alpha;
   unsigned char halign;
   unsigned char valign;
+  short int scaled_width;
+  short int scaled_height;
   unsigned char wfm_mode;
   _Bool is_dithered;
+  _Bool sw_dithering;
   _Bool is_nightmode;
   _Bool no_refresh;
 } FBInkConfig;
