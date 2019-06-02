@@ -127,6 +127,8 @@ typedef struct {
   unsigned int screen_height;
   unsigned int bpp;
   char device_name[16];
+  char device_codename[16];
+  char device_platform[16];
   short unsigned int device_id;
   unsigned char pen_fg_color;
   unsigned char pen_bg_color;
@@ -145,6 +147,7 @@ typedef struct {
   _Bool is_kobo_non_mt;
   unsigned char ntx_boot_rota;
   unsigned char ntx_rota_quirk;
+  unsigned char current_rota;
   _Bool can_rotate;
 } FBInkState;
 typedef struct {
@@ -202,6 +205,12 @@ typedef struct {
   unsigned char bpp;
   _Bool is_full;
 } FBInkDump;
+typedef struct {
+  short unsigned int top;
+  short unsigned int left;
+  short unsigned int width;
+  short unsigned int height;
+} FBInkRect;
 const char *fbink_version(void);
 int fbink_open(void);
 int fbink_close(int);
@@ -223,6 +232,7 @@ int fbink_cls(int, const FBInkConfig *restrict);
 int fbink_dump(int, FBInkDump *restrict);
 int fbink_region_dump(int, short int, short int, short unsigned int, short unsigned int, const FBInkConfig *restrict, FBInkDump *restrict);
 int fbink_restore(int, const FBInkConfig *restrict, const FBInkDump *restrict);
+FBInkRect fbink_get_last_rect(void);
 int fbink_button_scan(int, _Bool, _Bool);
 int fbink_wait_for_usbms_processing(int, _Bool);
 """)
