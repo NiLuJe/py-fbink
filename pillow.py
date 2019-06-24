@@ -2,9 +2,12 @@
 """
 Another example on how to print image data via Pillow.
 
-This basically swaps FBInk's decoding for Pillow's,
+This example basically swaps FBInk's decoding for Pillow's,
 but the intent is simply to show how it can be used,
 ideally for image data *created* via Pillow ;).
+
+(Because if your aim was actually simply to print an image file,
+simply doing fbink.fbink_print_image(fbfd, sys.argv[1], 0, 0, fbink_cfg) would be faster ;p).
 """
 
 # To get a Py3k-like print function
