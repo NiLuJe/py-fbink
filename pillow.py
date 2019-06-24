@@ -47,9 +47,9 @@ try:
 		#       We could also enforce Grayscale (L), but FBInk/stb will take care of that if needed.
 		im = im.convert()
 
-	# If image is not grayscale, RGB or RGBA (f.g., a CMYK JPEG) convert that to RGBA.
+	# If image is not grayscale, RGB or RGBA (f.g., might be a CMYK JPEG) convert that to RGBA.
 	if im.mode not in ["L", "RGB", "RGBA"]:
-		print("Converting image to RGBA")
+		print("Image data is packed in an unsupported mode, converting to RGBA")
 		im = im.convert("RGBA")
 
 	# And finally, get that image data as raw packed pixels.
