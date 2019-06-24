@@ -3,7 +3,8 @@
 Another example on how to print image data via Pillow.
 
 This basically swaps FBInk's decoding for Pillow's,
-but the intent is to show how it can be used, ideally for image data *created* via Pillow ;).
+but the intent is simply to show how it can be used,
+ideally for image data *created* via Pillow ;).
 """
 
 # To get a Py3k-like print function
@@ -35,7 +36,8 @@ try:
 	# Load the image specified on the command line...
 	from PIL import Image
 	im = Image.open(sys.argv[1])
-	print("Image mode: {} & size: {}".format(im.mode, im.size))
+	print("Image mode: {}".format(im.mode))
+	print("Image size: {}x{}".format(im.width, im.height))
 
 	# Now, make sure we'll pass raw data in a format FBInk/stb knows how to handle, doing as few conversions as possible.
 	# If image is paletted, make it grayscale, because stb won't know how to deal with paletted raw data...
@@ -53,6 +55,6 @@ try:
 	raw_len = len(raw_data)
 	print("Raw data buffer length: {}".format(raw_len))
 
-	fbink.fbink_print_raw_data(fbfd, raw_data, im.size[0], im.size[1], raw_len, 0, 0, fbink_cfg)
+	fbink.fbink_print_raw_data(fbfd, raw_data, im.width, im.height, raw_len, 0, 0, fbink_cfg)
 finally:
 	fbink.fbink_close(fbfd)
