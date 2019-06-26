@@ -63,3 +63,25 @@ try:
 	FBInk.fbink_print_raw_data(fbfd, raw_data, im.width, im.height, raw_len, 0, 0, fbink_cfg)
 finally:
 	FBInk.fbink_close(fbfd)
+
+"""
+NOTE: If you want to leave *all* the pixel format conversions to Pillow,
+      you'll instead have to target the expected pixel format for the fb,
+      which you can do with something like this.
+      In practice, this is usually slower than letting FBInk/stb handle it, though.
+
+	# Figure out which pixel-format is best suited to the current fb/settings
+	fbink_state = ffi.new("FBInkState *")
+	FBInk.fbink_get_state(fbink_cfg, fbink_state)
+
+	# Assume RGB by default
+	target_mode = "RGB"
+	# Switch to grayscale if fb <= 8bpp
+	if fbink_state.bpp <= 8:
+		target_mode = "L"
+	# Enable alpha unless we requested ignore_alpha
+	if not fbink_cfg.ignore_alpha:
+		target_mode += "A"
+	print("Target mode: {}".format(target_mode))
+
+"""
