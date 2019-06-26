@@ -7,18 +7,18 @@ but the intent is simply to show how it can be used,
 ideally for image data *created* via Pillow ;).
 
 (Because if your aim was actually simply to print an image file,
-simply doing fbink.fbink_print_image(fbfd, sys.argv[1], 0, 0, fbink_cfg) would be faster ;p).
+simply doing FBInk.fbink_print_image(fbfd, sys.argv[1], 0, 0, fbink_cfg) would be faster ;p).
 """
 
 # To get a Py3k-like print function
 from __future__ import print_function
 
 import sys
-# Load the wrapper module, it's linked against fbink, so the dynamic loader will take care of pulling in the actual FBInk library
-from _fbink import ffi, lib as fbink
+# Load the wrapper module, it's linked against FBInk, so the dynamic loader will take care of pulling in the actual FBInk library
+from _fbink import ffi, lib as FBInk
 
 # Let's check which FBInk version we're using...
-print("Loaded FBInk {}".format(ffi.string(fbink.fbink_version())))
+print("Loaded FBInk {}".format(ffi.string(FBInk.fbink_version())))
 
 # Setup the config...
 fbink_cfg = ffi.new("FBInkConfig *")
@@ -32,9 +32,9 @@ if len(sys.argv) < 2:
 	raise SystemExit("Expected a path to an image file as the first argument!")
 
 # NOTE: No error checking is done here!
-fbfd = fbink.fbink_open()
+fbfd = FBInk.fbink_open()
 try:
-	fbink.fbink_init(fbfd, fbink_cfg)
+	FBInk.fbink_init(fbfd, fbink_cfg)
 
 	# Load the image specified on the command line...
 	from PIL import Image
@@ -60,6 +60,6 @@ try:
 	raw_len = len(raw_data)
 	print("Raw data buffer length: {}".format(raw_len))
 
-	fbink.fbink_print_raw_data(fbfd, raw_data, im.width, im.height, raw_len, 0, 0, fbink_cfg)
+	FBInk.fbink_print_raw_data(fbfd, raw_data, im.width, im.height, raw_len, 0, 0, fbink_cfg)
 finally:
-	fbink.fbink_close(fbfd)
+	FBInk.fbink_close(fbfd)
