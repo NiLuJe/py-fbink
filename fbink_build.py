@@ -40,6 +40,9 @@ typedef enum {
   SPLEEN = 22,
   TEWI = 23,
   TEWIB = 24,
+  TOPAZ = 25,
+  MICROKNIGHT = 26,
+  VGA = 27,
 } FONT_INDEX_T;
 typedef enum {
   FNT_REGULAR = 0,
@@ -190,10 +193,17 @@ typedef struct {
     short int left;
     short int right;
   } margins;
-  short unsigned int size_pt;
+  float size_pt;
   _Bool is_centered;
   _Bool is_formatted;
+  _Bool compute_only;
+  _Bool no_truncation;
 } FBInkOTConfig;
+typedef struct {
+  short unsigned int computed_lines;
+  short unsigned int rendered_lines;
+  _Bool truncated;
+} FBInkOTFit;
 typedef struct {
   unsigned char *restrict data;
   size_t size;
@@ -220,7 +230,7 @@ int fbink_free_ot_fonts(void);
 void fbink_state_dump(const FBInkConfig *restrict);
 void fbink_get_state(const FBInkConfig *restrict, FBInkState *restrict);
 int fbink_print(int, const char *restrict, const FBInkConfig *restrict);
-int fbink_print_ot(int, const char *restrict, const FBInkOTConfig *restrict, const FBInkConfig *restrict);
+int fbink_print_ot(int, const char *restrict, const FBInkOTConfig *restrict, const FBInkConfig *restrict, FBInkOTFit *restrict);
 int fbink_printf(int, const FBInkOTConfig *restrict, const FBInkConfig *restrict, const char *, ...);
 int fbink_refresh(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned char, const FBInkConfig *restrict);
 int fbink_reinit(int, const FBInkConfig *restrict);
