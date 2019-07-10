@@ -18,7 +18,8 @@ import sys
 from _fbink import ffi, lib as FBInk
 
 # Let's check which FBInk version we're using...
-print("Loaded FBInk {}".format(ffi.string(FBInk.fbink_version()).decode('ascii')))
+# NOTE: ffi.string() returns a bytes on Python 3, not a str, hence the extra decode
+print("Loaded FBInk {}".format(ffi.string(FBInk.fbink_version()).decode("ascii")))
 
 # Setup the config...
 fbink_cfg = ffi.new("FBInkConfig *")

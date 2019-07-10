@@ -11,7 +11,8 @@ import sys
 from _fbink import ffi, lib as FBInk
 
 # Let's check which FBInk version we're using...
-print("Loaded FBInk {}".format(ffi.string(FBInk.fbink_version()).decode('ascii')))
+# NOTE: ffi.string() returns a bytes on Python 3, not a str, hence the extra decode
+print("Loaded FBInk {}".format(ffi.string(FBInk.fbink_version()).decode("ascii")))
 
 # And now we're good to go! Let's print "Hello World" in the center of the screen...
 # Setup the config...
@@ -30,7 +31,7 @@ if FBInk.fbink_init(fbfd, fbink_cfg) < 0:
 	raise SystemExit("Failed to initialize FBInk, aborting . . .")
 
 # Do stuff!
-if FBInk.fbink_print(fbfd, "Hello World", fbink_cfg) < 0:
+if FBInk.fbink_print(fbfd, b"Hello World", fbink_cfg) < 0:
 	print("Failed to print that string!", file=sys.stderr)
 
 # And now we can wind things down...
@@ -42,6 +43,7 @@ if FBInk.fbink_close(fbfd) < 0:
 fbfd = FBInk.fbink_open()
 try:
 	FBInk.fbink_init(fbfd, fbink_cfg)
+	# NOTE: On Python 3, cFFI maps char to bytes, not str
 	FBInk.fbink_print(fbfd, b"Hello World", fbink_cfg)
 finally:
 	FBInk.fbink_close(fbfd)
