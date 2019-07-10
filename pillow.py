@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 """
 Another example on how to print image data via Pillow.
 
@@ -18,7 +18,7 @@ import sys
 from _fbink import ffi, lib as FBInk
 
 # Let's check which FBInk version we're using...
-print("Loaded FBInk {}".format(ffi.string(FBInk.fbink_version())))
+print("Loaded FBInk {}".format(ffi.string(FBInk.fbink_version()).decode('ascii')))
 
 # Setup the config...
 fbink_cfg = ffi.new("FBInkConfig *")

@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 """
 Barebones example of FBInk usage through Python's cFFI module
 """
@@ -11,7 +11,7 @@ import sys
 from _fbink import ffi, lib as FBInk
 
 # Let's check which FBInk version we're using...
-print("Loaded FBInk {}".format(ffi.string(FBInk.fbink_version())))
+print("Loaded FBInk {}".format(ffi.string(FBInk.fbink_version()).decode('ascii')))
 
 # And now we're good to go! Let's print "Hello World" in the center of the screen...
 # Setup the config...
@@ -42,6 +42,6 @@ if FBInk.fbink_close(fbfd) < 0:
 fbfd = FBInk.fbink_open()
 try:
 	FBInk.fbink_init(fbfd, fbink_cfg)
-	FBInk.fbink_print(fbfd, "Hello World", fbink_cfg)
+	FBInk.fbink_print(fbfd, b"Hello World", fbink_cfg)
 finally:
 	FBInk.fbink_close(fbfd)
