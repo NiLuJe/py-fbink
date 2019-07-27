@@ -1,6 +1,6 @@
 # Python cFFI bindings for FBInk
 
-Licensed under the [AGPLv3](/LICENSE).
+Licensed under the [GPLv3+](/LICENSE).
 
 See [FBInk](https://github.com/NiLuJe/FBInk) ;).
 
