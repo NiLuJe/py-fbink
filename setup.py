@@ -16,7 +16,7 @@ setup(
 	author="NiLuJe",
 	author_email="ninuje@gmail.com",
 	description="cFFI bindings for FBInk",
-	license="AGPLv3+",
+	license="GPLv3+",
 	keywords="fbink ffi cffi",
 	url="https://github.com/NiLuJe/py-fbink/",
 )
