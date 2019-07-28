@@ -19,4 +19,18 @@ setup(
 	license="GPLv3+",
 	keywords="fbink ffi cffi",
 	url="https://github.com/NiLuJe/py-fbink/",
+	classifiers=[
+		"Development Status :: 5 - Production/Stable",
+		"Environment :: Console :: Framebuffer",
+		"Intended Audience :: Developers",
+		"License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+		"Natural Language :: English",
+		"Operating System :: POSIX :: Linux",
+		"Programming Language :: C",
+		"Programming Language :: Python",
+		"Programming Language :: Python :: 2.7",
+		"Programming Language :: Python :: 3",
+		"Topic :: Multimedia :: Graphics",
+		"Topic :: Software Development :: Libraries",
+	],
 )
