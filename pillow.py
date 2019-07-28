@@ -71,6 +71,9 @@ NOTE: If you want to leave *all* the pixel format conversions to Pillow,
       which you can do with something like this.
       In practice, this is usually slower than letting FBInk/stb handle it, though.
 
+      Unless, again, you're *creating* image data via Pillow, in which case,
+      it's definitely better to create it in the appropriate pixel format from the get go ;).
+
 	# Figure out which pixel-format is best suited to the current fb/settings
 	fbink_state = ffi.new("FBInkState *")
 	FBInk.fbink_get_state(fbink_cfg, fbink_state)
