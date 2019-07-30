@@ -194,6 +194,7 @@ typedef struct {
     short int right;
   } margins;
   float size_pt;
+  short unsigned int size_px;
   _Bool is_centered;
   _Bool is_formatted;
   _Bool compute_only;
