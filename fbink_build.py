@@ -243,6 +243,7 @@ int fbink_cls(int, const FBInkConfig *restrict);
 int fbink_dump(int, FBInkDump *restrict);
 int fbink_region_dump(int, short int, short int, short unsigned int, short unsigned int, const FBInkConfig *restrict, FBInkDump *restrict);
 int fbink_restore(int, const FBInkConfig *restrict, const FBInkDump *restrict);
+int fbink_free_dump_data(FBInkDump *restrict);
 FBInkRect fbink_get_last_rect(void);
 int fbink_button_scan(int, _Bool, _Bool);
 int fbink_wait_for_usbms_processing(int, _Bool);
