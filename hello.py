@@ -45,5 +45,53 @@ try:
 	FBInk.fbink_init(fbfd, fbink_cfg)
 	# NOTE: On Python 3, cFFI maps char to bytes, not str
 	FBInk.fbink_print(fbfd, b"Hello World", fbink_cfg)
+
+	# And a few other random examples...
+	"""
+	# A full-screen, flashing refresh
+	fbink_cfg.is_flashing = True
+	FBInk.fbink_refresh(fbfd, 0, 0, 0, 0, FBInk.HWD_PASSTHROUGH, fbink_cfg)
+
+	fbink_cfg.is_flashing = False
+
+
+	# A (fairly useless) dump & restore cycle (with nightmode enabled for a free inversion)
+	dump = ffi.new("FBInkDump *")
+	FBInk.fbink_region_dumpn(fbfd, 350, 350, 250, 250, fbink_cfg, dump)
+
+	fbink_cfg.is_nightmode = True
+	fbink_cfg.is_flashing = True
+	FBInk.fbink_restore(fbfd, fbink_cfg, dump)
+
+	FBInk.fbink_free_dump_data(dump)
+
+	fbink_cfg.is_nightmode = False
+	fbink_cfg.is_flashing = False
+
+
+	# Fancy OT/TTF printing
+	FBInk.fbink_add_ot_font(b"Foo_Bold.ttf", FBInk.FNT_BOLD)
+	fbink_ot_cfg = ffi.new("FBInkOTConfig *")
+	fbink_ot_cfg.margins.top = 500
+	fbink_ot_cfg.margins.bottom = 600
+	fbink_ot_cfg.margins.left = 400
+	fbink_ot_cfg.margins.right = 50
+	fbink_ot_cfg.size_pt = 14.0
+	fbink_ot_cfg.is_formatted = True
+	FBInk.fbink_print_ot(fbfd, b"**Wheeeee!**", fbink_ot_cfg, fbink_cfg, ffi.NULL)
+
+	FBInk.fbink_free_ot_fonts()
+
+	# Another refresh example, this time with nightmode enabled (i.e., invert the current screen)
+	fbink_cfg.is_nightmode = True
+	fbink_cfg.is_flashing = True
+	FBInk.fbink_refresh(fbfd, 0, 0, 0, 0, FBInk.HWD_PASSTHROUGH, fbink_cfg)
+
+	fbink_cfg.is_nightmode = False
+	fbink_cfg.is_flashing = False
+	# NOTE: We'd just need to disable nightmode to get back the original colors,
+	#       as is_nightmode doesn't actually affect the framebuffer content,
+	#       the inversion is done by the eInk controller on its own private buffer.
+	"""
 finally:
 	FBInk.fbink_close(fbfd)
