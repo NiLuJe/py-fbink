@@ -57,7 +57,7 @@ try:
 
 	# A (fairly useless) dump & restore cycle (with nightmode enabled for a free inversion)
 	dump = ffi.new("FBInkDump *")
-	FBInk.fbink_region_dumpn(fbfd, 350, 350, 250, 250, fbink_cfg, dump)
+	FBInk.fbink_region_dump(fbfd, 350, 350, 250, 250, fbink_cfg, dump)
 
 	fbink_cfg.is_nightmode = True
 	fbink_cfg.is_flashing = True
