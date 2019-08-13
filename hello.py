@@ -46,6 +46,7 @@ try:
 	# NOTE: On Python 3, cFFI maps char to bytes, not str
 	FBInk.fbink_print(fbfd, b"Hello World", fbink_cfg)
 
+
 	# And a few other random examples...
 	"""
 	# A full-screen, flashing refresh
@@ -81,6 +82,7 @@ try:
 	FBInk.fbink_print_ot(fbfd, b"**Wheeeee!**", fbink_ot_cfg, fbink_cfg, ffi.NULL)
 
 	FBInk.fbink_free_ot_fonts()
+
 
 	# Another refresh example, this time with nightmode enabled (i.e., invert the current screen)
 	fbink_cfg.is_nightmode = True
