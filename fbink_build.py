@@ -150,6 +150,7 @@ typedef struct {
   _Bool is_kobo_non_mt;
   unsigned char ntx_boot_rota;
   unsigned char ntx_rota_quirk;
+  _Bool is_ntx_quirky_landscape;
   unsigned char current_rota;
   _Bool can_rotate;
 } FBInkState;
@@ -206,31 +207,29 @@ typedef struct {
   _Bool truncated;
 } FBInkOTFit;
 typedef struct {
+  short unsigned int left;
+  short unsigned int top;
+  short unsigned int width;
+  short unsigned int height;
+} FBInkRect;
+typedef struct {
   unsigned char *restrict data;
   size_t size;
-  short unsigned int x;
-  short unsigned int y;
-  short unsigned int w;
-  short unsigned int h;
+  FBInkRect area;
+  FBInkRect clip;
   unsigned char rota;
   unsigned char bpp;
   _Bool is_full;
 } FBInkDump;
-typedef struct {
-  short unsigned int top;
-  short unsigned int left;
-  short unsigned int width;
-  short unsigned int height;
-} FBInkRect;
 const char *fbink_version(void);
 int fbink_open(void);
 int fbink_close(int);
 int fbink_init(int, const FBInkConfig *restrict);
-int fbink_add_ot_font(const char *, FONT_STYLE_T);
-int fbink_free_ot_fonts(void);
 void fbink_state_dump(const FBInkConfig *restrict);
 void fbink_get_state(const FBInkConfig *restrict, FBInkState *restrict);
 int fbink_print(int, const char *restrict, const FBInkConfig *restrict);
+int fbink_add_ot_font(const char *, FONT_STYLE_T);
+int fbink_free_ot_fonts(void);
 int fbink_print_ot(int, const char *restrict, const FBInkOTConfig *restrict, const FBInkConfig *restrict, FBInkOTFit *restrict);
 int fbink_printf(int, const FBInkOTConfig *restrict, const FBInkConfig *restrict, const char *, ...);
 int fbink_refresh(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned char, const FBInkConfig *restrict);
