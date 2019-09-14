@@ -14,6 +14,7 @@ ffibuilder = FFI()
 # NOTE: We re-purpose the Lua cdefs generated via ffi-cdecl
 ffibuilder.cdef("""
 static const int FBFD_AUTO = -1;
+static const int LAST_MARKER = 0;
 typedef enum {
   IBM = 0,
   UNSCII = 1,
@@ -233,6 +234,9 @@ int fbink_free_ot_fonts(void);
 int fbink_print_ot(int, const char *restrict, const FBInkOTConfig *restrict, const FBInkConfig *restrict, FBInkOTFit *restrict);
 int fbink_printf(int, const FBInkOTConfig *restrict, const FBInkConfig *restrict, const char *, ...);
 int fbink_refresh(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned char, const FBInkConfig *restrict);
+int fbink_wait_for_submission(int, unsigned int);
+int fbink_wait_for_complete(int, unsigned int);
+unsigned int fbink_get_last_marker(void);
 int fbink_reinit(int, const FBInkConfig *restrict);
 int fbink_print_progress_bar(int, unsigned char, const FBInkConfig *restrict);
 int fbink_print_activity_bar(int, unsigned char, const FBInkConfig *restrict);
