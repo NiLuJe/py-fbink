@@ -121,6 +121,7 @@ typedef enum {
   NTX_ROTA_STRAIGHT = 0,
   NTX_ROTA_ALL_INVERTED = 1,
   NTX_ROTA_ODD_INVERTED = 2,
+  NTX_ROTA_SANE = 3,
 } NTX_ROTA_INDEX_T;
 typedef struct {
   long int user_hz;
