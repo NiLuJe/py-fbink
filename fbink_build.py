@@ -188,6 +188,7 @@ typedef struct {
   _Bool sw_dithering;
   _Bool is_nightmode;
   _Bool no_refresh;
+  _Bool to_syslog;
 } FBInkConfig;
 typedef struct {
   struct {
