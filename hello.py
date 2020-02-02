@@ -51,7 +51,7 @@ try:
 	"""
 	# A full-screen, flashing refresh
 	fbink_cfg.is_flashing = True
-	FBInk.fbink_refresh(fbfd, 0, 0, 0, 0, FBInk.HWD_PASSTHROUGH, fbink_cfg)
+	FBInk.fbink_refresh(fbfd, 0, 0, 0, 0, fbink_cfg)
 
 	fbink_cfg.is_flashing = False
 
@@ -87,7 +87,7 @@ try:
 	# Another refresh example, this time with nightmode enabled (i.e., invert the current screen)
 	fbink_cfg.is_nightmode = True
 	fbink_cfg.is_flashing = True
-	FBInk.fbink_refresh(fbfd, 0, 0, 0, 0, FBInk.HWD_PASSTHROUGH, fbink_cfg)
+	FBInk.fbink_refresh(fbfd, 0, 0, 0, 0, fbink_cfg)
 
 	fbink_cfg.is_nightmode = False
 	fbink_cfg.is_flashing = False
