@@ -3,7 +3,7 @@
 from setuptools import setup, find_packages
 setup(
 	name="FBInk",
-	version="1.20.2",
+	version="1.21.0",
 	packages=find_packages(),
 	scripts=['hello.py'],
 
