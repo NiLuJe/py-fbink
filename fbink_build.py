@@ -57,6 +57,12 @@ typedef enum {
   EDGE = 2,
 } ALIGN_INDEX_T;
 typedef enum {
+  NO_PADDING = 0,
+  HORI_PADDING = 1,
+  VERT_PADDING = 2,
+  FULL_PADDING = 3,
+} PADDING_INDEX_T;
+typedef enum {
   FG_BLACK = 0,
   FG_GRAY1 = 1,
   FG_GRAY2 = 2,
@@ -109,6 +115,8 @@ typedef enum {
   WFM_GCK16 = 13,
   WFM_GLKW16 = 14,
   WFM_INIT = 15,
+  WFM_UNKNOWN = 16,
+  WFM_INIT2 = 17,
 } WFM_MODE_INDEX_T;
 typedef enum {
   HWD_PASSTHROUGH = 0,
@@ -116,6 +124,7 @@ typedef enum {
   HWD_ATKINSON = 2,
   HWD_ORDERED = 3,
   HWD_QUANT_ONLY = 4,
+  HWD_LEGACY = 255,
 } HW_DITHER_INDEX_T;
 typedef enum {
   NTX_ROTA_STRAIGHT = 0,
@@ -184,7 +193,7 @@ typedef struct {
   short int scaled_width;
   short int scaled_height;
   uint8_t wfm_mode;
-  bool is_dithered;
+  uint8_t dithering_mode;
   bool sw_dithering;
   bool is_nightmode;
   bool no_refresh;
@@ -200,6 +209,7 @@ typedef struct {
   float size_pt;
   short unsigned int size_px;
   bool is_centered;
+  uint8_t padding;
   bool is_formatted;
   bool compute_only;
   bool no_truncation;
@@ -235,7 +245,7 @@ int fbink_add_ot_font(const char *, FONT_STYLE_T);
 int fbink_free_ot_fonts(void);
 int fbink_print_ot(int, const char *restrict, const FBInkOTConfig *restrict, const FBInkConfig *restrict, FBInkOTFit *restrict);
 int fbink_printf(int, const FBInkOTConfig *restrict, const FBInkConfig *restrict, const char *, ...);
-int fbink_refresh(int, uint32_t, uint32_t, uint32_t, uint32_t, uint8_t, const FBInkConfig *restrict);
+int fbink_refresh(int, uint32_t, uint32_t, uint32_t, uint32_t, const FBInkConfig *restrict);
 int fbink_wait_for_submission(int, uint32_t);
 int fbink_wait_for_complete(int, uint32_t);
 uint32_t fbink_get_last_marker(void);
@@ -244,7 +254,7 @@ int fbink_print_progress_bar(int, uint8_t, const FBInkConfig *restrict);
 int fbink_print_activity_bar(int, uint8_t, const FBInkConfig *restrict);
 int fbink_print_image(int, const char *, short int, short int, const FBInkConfig *restrict);
 int fbink_print_raw_data(int, unsigned char *, const int, const int, const size_t, short int, short int, const FBInkConfig *restrict);
-int fbink_cls(int, const FBInkConfig *restrict);
+int fbink_cls(int, const FBInkConfig *restrict, const FBInkRect *restrict);
 int fbink_dump(int, FBInkDump *restrict);
 int fbink_region_dump(int, short int, short int, short unsigned int, short unsigned int, const FBInkConfig *restrict, FBInkDump *restrict);
 int fbink_restore(int, const FBInkConfig *restrict, const FBInkDump *restrict);
