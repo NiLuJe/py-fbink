@@ -45,7 +45,7 @@ try:
 
 	# Now, make sure we'll pass raw data in a format FBInk/stb knows how to handle, doing as few conversions as possible.
 	# If image is paletted, translate that to actual values, because stb won't know how to deal with paletted raw data...
-	if im.mode is "P":
+	if im.mode == "P":
 		print("Image is paletted, translating to actual values")
 		# NOTE: No mode means "just honor the palette". Usually, that's RGB.
 		#       We could also enforce Grayscale (L), but FBInk/stb will take care of that if needed.
