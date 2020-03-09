@@ -44,24 +44,31 @@ typedef enum {
   TOPAZ = 25,
   MICROKNIGHT = 26,
   VGA = 27,
-} FONT_INDEX_T;
+  FONT_MAX = 255,
+} FONT_INDEX_E;
+typedef unsigned char FONT_INDEX_T;
 typedef enum {
   FNT_REGULAR = 0,
   FNT_ITALIC = 1,
   FNT_BOLD = 2,
   FNT_BOLD_ITALIC = 3,
-} FONT_STYLE_T;
+} FONT_STYLE_E;
+typedef int FONT_STYLE_T;
 typedef enum {
   NONE = 0,
   CENTER = 1,
   EDGE = 2,
-} ALIGN_INDEX_T;
+  ALIGN_MAX = 255,
+} ALIGN_INDEX_E;
+typedef unsigned char ALIGN_INDEX_T;
 typedef enum {
   NO_PADDING = 0,
   HORI_PADDING = 1,
   VERT_PADDING = 2,
   FULL_PADDING = 3,
-} PADDING_INDEX_T;
+  MAX_PADDING = 255,
+} PADDING_INDEX_E;
+typedef unsigned char PADDING_INDEX_T;
 typedef enum {
   FG_BLACK = 0,
   FG_GRAY1 = 1,
@@ -79,7 +86,9 @@ typedef enum {
   FG_GRAYD = 13,
   FG_GRAYE = 14,
   FG_WHITE = 15,
-} FG_COLOR_INDEX_T;
+  FG_MAX = 255,
+} FG_COLOR_INDEX_E;
+typedef unsigned char FG_COLOR_INDEX_T;
 typedef enum {
   BG_WHITE = 0,
   BG_GRAYE = 1,
@@ -97,7 +106,9 @@ typedef enum {
   BG_GRAY2 = 13,
   BG_GRAY1 = 14,
   BG_BLACK = 15,
-} BG_COLOR_INDEX_T;
+  BG_MAX = 255,
+} BG_COLOR_INDEX_E;
+typedef unsigned char BG_COLOR_INDEX_T;
 typedef enum {
   WFM_AUTO = 0,
   WFM_DU = 1,
@@ -117,7 +128,9 @@ typedef enum {
   WFM_INIT = 15,
   WFM_UNKNOWN = 16,
   WFM_INIT2 = 17,
-} WFM_MODE_INDEX_T;
+  WFM_MAX = 255,
+} WFM_MODE_INDEX_E;
+typedef unsigned char WFM_MODE_INDEX_T;
 typedef enum {
   HWD_PASSTHROUGH = 0,
   HWD_FLOYD_STEINBERG = 1,
@@ -125,13 +138,16 @@ typedef enum {
   HWD_ORDERED = 3,
   HWD_QUANT_ONLY = 4,
   HWD_LEGACY = 255,
-} HW_DITHER_INDEX_T;
+} HW_DITHER_INDEX_E;
+typedef unsigned char HW_DITHER_INDEX_T;
 typedef enum {
   NTX_ROTA_STRAIGHT = 0,
   NTX_ROTA_ALL_INVERTED = 1,
   NTX_ROTA_ODD_INVERTED = 2,
   NTX_ROTA_SANE = 3,
-} NTX_ROTA_INDEX_T;
+  NTX_ROTA_MAX = 255,
+} NTX_ROTA_INDEX_E;
+typedef unsigned char NTX_ROTA_INDEX_T;
 typedef struct {
   long int user_hz;
   const char *restrict font_name;
@@ -160,7 +176,7 @@ typedef struct {
   bool is_perfect_fit;
   bool is_kobo_non_mt;
   uint8_t ntx_boot_rota;
-  uint8_t ntx_rota_quirk;
+  NTX_ROTA_INDEX_T ntx_rota_quirk;
   bool is_ntx_quirky_landscape;
   uint8_t current_rota;
   bool can_rotate;
@@ -169,7 +185,7 @@ typedef struct {
   short int row;
   short int col;
   uint8_t fontmult;
-  uint8_t fontname;
+  FONT_INDEX_T fontname;
   bool is_inverted;
   bool is_flashing;
   bool is_cleared;
@@ -179,8 +195,8 @@ typedef struct {
   bool is_halfway;
   bool is_padded;
   bool is_rpadded;
-  uint8_t fg_color;
-  uint8_t bg_color;
+  FG_COLOR_INDEX_T fg_color;
+  BG_COLOR_INDEX_T bg_color;
   bool is_overlay;
   bool is_bgless;
   bool is_fgless;
@@ -188,12 +204,12 @@ typedef struct {
   bool is_verbose;
   bool is_quiet;
   bool ignore_alpha;
-  uint8_t halign;
-  uint8_t valign;
+  ALIGN_INDEX_T halign;
+  ALIGN_INDEX_T valign;
   short int scaled_width;
   short int scaled_height;
-  uint8_t wfm_mode;
-  uint8_t dithering_mode;
+  WFM_MODE_INDEX_T wfm_mode;
+  HW_DITHER_INDEX_T dithering_mode;
   bool sw_dithering;
   bool is_nightmode;
   bool no_refresh;
@@ -209,7 +225,7 @@ typedef struct {
   float size_pt;
   short unsigned int size_px;
   bool is_centered;
-  uint8_t padding;
+  PADDING_INDEX_T padding;
   bool is_formatted;
   bool compute_only;
   bool no_truncation;
@@ -227,6 +243,7 @@ typedef struct {
 } FBInkRect;
 typedef struct {
   unsigned char *restrict data;
+  size_t stride;
   size_t size;
   FBInkRect area;
   FBInkRect clip;
@@ -249,12 +266,23 @@ int fbink_refresh(int, uint32_t, uint32_t, uint32_t, uint32_t, const FBInkConfig
 int fbink_wait_for_submission(int, uint32_t);
 int fbink_wait_for_complete(int, uint32_t);
 uint32_t fbink_get_last_marker(void);
+static const int OK_BPP_CHANGE = 512;
+static const int OK_ROTA_CHANGE = 1024;
 int fbink_reinit(int, const FBInkConfig *restrict);
+void fbink_update_verbosity(const FBInkConfig *restrict);
+int fbink_update_pen_colors(const FBInkConfig *restrict);
+static const int OK_ALREADY_SAME = 512;
+int fbink_set_fg_pen_gray(uint8_t, bool, bool);
+int fbink_set_bg_pen_gray(uint8_t, bool, bool);
+int fbink_set_fg_pen_rgba(uint8_t, uint8_t, uint8_t, uint8_t, bool, bool);
+int fbink_set_bg_pen_rgba(uint8_t, uint8_t, uint8_t, uint8_t, bool, bool);
 int fbink_print_progress_bar(int, uint8_t, const FBInkConfig *restrict);
 int fbink_print_activity_bar(int, uint8_t, const FBInkConfig *restrict);
 int fbink_print_image(int, const char *, short int, short int, const FBInkConfig *restrict);
 int fbink_print_raw_data(int, unsigned char *, const int, const int, const size_t, short int, short int, const FBInkConfig *restrict);
 int fbink_cls(int, const FBInkConfig *restrict, const FBInkRect *restrict);
+int fbink_grid_clear(int, short unsigned int, short unsigned int, const FBInkConfig *restrict);
+int fbink_grid_refresh(int, short unsigned int, short unsigned int, const FBInkConfig *restrict);
 int fbink_dump(int, FBInkDump *restrict);
 int fbink_region_dump(int, short int, short int, short unsigned int, short unsigned int, const FBInkConfig *restrict, FBInkDump *restrict);
 int fbink_restore(int, const FBInkConfig *restrict, const FBInkDump *restrict);
