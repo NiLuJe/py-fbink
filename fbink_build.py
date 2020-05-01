@@ -44,6 +44,9 @@ typedef enum {
   TOPAZ = 25,
   MICROKNIGHT = 26,
   VGA = 27,
+  UNIFONT = 28,
+  UNIFONTDW = 29,
+  COZETTE = 30,
   FONT_MAX = 255,
 } FONT_INDEX_E;
 typedef unsigned char FONT_INDEX_T;
@@ -268,6 +271,7 @@ int fbink_wait_for_complete(int, uint32_t);
 uint32_t fbink_get_last_marker(void);
 static const int OK_BPP_CHANGE = 512;
 static const int OK_ROTA_CHANGE = 1024;
+static const int OK_LAYOUT_CHANGE = 2048;
 int fbink_reinit(int, const FBInkConfig *restrict);
 void fbink_update_verbosity(const FBInkConfig *restrict);
 int fbink_update_pen_colors(const FBInkConfig *restrict);
