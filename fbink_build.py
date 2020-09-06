@@ -225,6 +225,7 @@ typedef struct {
     short int left;
     short int right;
   } margins;
+  FONT_STYLE_T style;
   float size_pt;
   short unsigned int size_px;
   bool is_centered;
