@@ -220,6 +220,12 @@ typedef struct {
 } FBInkConfig;
 typedef struct {
   struct {
+    void *regular;
+    void *italic;
+    void *bold;
+    void *bold_italic;
+  } font;
+  struct {
     short int top;
     short int bottom;
     short int left;
@@ -263,7 +269,9 @@ void fbink_state_dump(const FBInkConfig *restrict);
 void fbink_get_state(const FBInkConfig *restrict, FBInkState *restrict);
 int fbink_print(int, const char *restrict, const FBInkConfig *restrict);
 int fbink_add_ot_font(const char *, FONT_STYLE_T);
+int fbink_add_ot_font_v2(const char *, FONT_STYLE_T, FBInkOTConfig *restrict);
 int fbink_free_ot_fonts(void);
+int fbink_free_ot_fonts_v2(FBInkOTConfig *restrict);
 int fbink_print_ot(int, const char *restrict, const FBInkOTConfig *restrict, const FBInkConfig *restrict, FBInkOTFit *restrict);
 int fbink_printf(int, const FBInkOTConfig *restrict, const FBInkConfig *restrict, const char *, ...);
 int fbink_refresh(int, uint32_t, uint32_t, uint32_t, uint32_t, const FBInkConfig *restrict);
