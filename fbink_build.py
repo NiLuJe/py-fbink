@@ -134,6 +134,7 @@ typedef enum {
   WFM_A2IN = 18,
   WFM_A2OUT = 19,
   WFM_GC16HQ = 20,
+  WFM_GS16 = 21,
   WFM_MAX = 255,
 } WFM_MODE_INDEX_E;
 typedef unsigned char WFM_MODE_INDEX_T;
