@@ -291,7 +291,7 @@ int fbink_set_bg_pen_rgba(uint8_t, uint8_t, uint8_t, uint8_t, bool, bool);
 int fbink_print_progress_bar(int, uint8_t, const FBInkConfig *restrict);
 int fbink_print_activity_bar(int, uint8_t, const FBInkConfig *restrict);
 int fbink_print_image(int, const char *, short int, short int, const FBInkConfig *restrict);
-int fbink_print_raw_data(int, unsigned char *, const int, const int, const size_t, short int, short int, const FBInkConfig *restrict);
+int fbink_print_raw_data(int, unsigned char *restrict, const int, const int, const size_t, short int, short int, const FBInkConfig *restrict);
 int fbink_cls(int, const FBInkConfig *restrict, const FBInkRect *restrict);
 int fbink_grid_clear(int, short unsigned int, short unsigned int, const FBInkConfig *restrict);
 int fbink_grid_refresh(int, short unsigned int, short unsigned int, const FBInkConfig *restrict);
