@@ -49,7 +49,7 @@ typedef enum {
   COZETTE = 30,
   FONT_MAX = 255,
 } FONT_INDEX_E;
-typedef unsigned char FONT_INDEX_T;
+typedef uint8_t FONT_INDEX_T;
 typedef enum {
   FNT_REGULAR = 0,
   FNT_ITALIC = 1,
@@ -63,7 +63,7 @@ typedef enum {
   EDGE = 2,
   ALIGN_MAX = 255,
 } ALIGN_INDEX_E;
-typedef unsigned char ALIGN_INDEX_T;
+typedef uint8_t ALIGN_INDEX_T;
 typedef enum {
   NO_PADDING = 0,
   HORI_PADDING = 1,
@@ -71,7 +71,7 @@ typedef enum {
   FULL_PADDING = 3,
   MAX_PADDING = 255,
 } PADDING_INDEX_E;
-typedef unsigned char PADDING_INDEX_T;
+typedef uint8_t PADDING_INDEX_T;
 typedef enum {
   FG_BLACK = 0,
   FG_GRAY1 = 1,
@@ -91,7 +91,7 @@ typedef enum {
   FG_WHITE = 15,
   FG_MAX = 255,
 } FG_COLOR_INDEX_E;
-typedef unsigned char FG_COLOR_INDEX_T;
+typedef uint8_t FG_COLOR_INDEX_T;
 typedef enum {
   BG_WHITE = 0,
   BG_GRAYE = 1,
@@ -111,7 +111,7 @@ typedef enum {
   BG_BLACK = 15,
   BG_MAX = 255,
 } BG_COLOR_INDEX_E;
-typedef unsigned char BG_COLOR_INDEX_T;
+typedef uint8_t BG_COLOR_INDEX_T;
 typedef enum {
   WFM_AUTO = 0,
   WFM_DU = 1,
@@ -137,7 +137,7 @@ typedef enum {
   WFM_GS16 = 21,
   WFM_MAX = 255,
 } WFM_MODE_INDEX_E;
-typedef unsigned char WFM_MODE_INDEX_T;
+typedef uint8_t WFM_MODE_INDEX_T;
 typedef enum {
   HWD_PASSTHROUGH = 0,
   HWD_FLOYD_STEINBERG = 1,
@@ -146,7 +146,7 @@ typedef enum {
   HWD_QUANT_ONLY = 4,
   HWD_LEGACY = 255,
 } HW_DITHER_INDEX_E;
-typedef unsigned char HW_DITHER_INDEX_T;
+typedef uint8_t HW_DITHER_INDEX_T;
 typedef enum {
   NTX_ROTA_STRAIGHT = 0,
   NTX_ROTA_ALL_INVERTED = 1,
@@ -154,7 +154,7 @@ typedef enum {
   NTX_ROTA_SANE = 3,
   NTX_ROTA_MAX = 255,
 } NTX_ROTA_INDEX_E;
-typedef unsigned char NTX_ROTA_INDEX_T;
+typedef uint8_t NTX_ROTA_INDEX_T;
 typedef struct {
   long int user_hz;
   const char *restrict font_name;
