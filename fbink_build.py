@@ -181,12 +181,15 @@ typedef struct {
   uint8_t glyph_width;
   uint8_t glyph_height;
   bool is_perfect_fit;
+  bool is_pb_sunxi;
+  bool is_kindle_legacy;
   bool is_kobo_non_mt;
   uint8_t ntx_boot_rota;
   NTX_ROTA_INDEX_T ntx_rota_quirk;
   bool is_ntx_quirky_landscape;
   uint8_t current_rota;
   bool can_rotate;
+  bool can_hw_invert;
 } FBInkState;
 typedef struct {
   short int row;
