@@ -1,8 +1,13 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
+#
+# The resulting Python module, as FBInk itself:
+# SPDX-License-Identifier: GPL-3.0-or-later
 #
 # out-of-line, API mode Python FFI bindings for FBink, via cffi
+# c.f., <https://cffi.readthedocs.io/en/latest/overview.html>
 #
-# c.f., https://cffi.readthedocs.io/en/latest/overview.html
+# NOTE: We re-purpose the Lua cdefs generated via ffi-cdecl
+#       <https://github.com/koreader/ffi-cdecl>
 #
 ##
 
@@ -11,7 +16,6 @@ ffibuilder = FFI()
 
 # cdef() expects a string listing the C types, functions and
 # globals needed from Python. The string follows the C syntax.
-# NOTE: We re-purpose the Lua cdefs generated via ffi-cdecl
 ffibuilder.cdef("""
 static const int FBFD_AUTO = -1;
 static const int LAST_MARKER = 0;
